@@ -1,0 +1,8 @@
+project_id = "chitchat"
+
+[functions.push-dispatch]
+verify_jwt = false
+
+# Auth is explicitly verified with auth.getUser(jwt), including publishable-key projects.
+[functions.delete-account]
+verify_jwt = false

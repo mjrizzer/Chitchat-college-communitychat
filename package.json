@@ -1,0 +1,13 @@
+{
+  "name": "chitchat-backend-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:sql": "node tools/test-sql.mjs",
+    "check:functions": "deno check supabase/functions/push-dispatch/index.ts supabase/functions/delete-account/index.ts"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.13",
+    "deno": "2.9.6"
+  }
+}
