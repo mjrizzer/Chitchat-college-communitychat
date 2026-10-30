@@ -1,10 +1,13 @@
+import java.util.Properties
+import com.android.build.api.dsl.ApplicationExtension
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-val releaseProperties = java.util.Properties()
+val releaseProperties = Properties()
 val releasePropertiesFile = rootProject.file("key.properties")
 if (releasePropertiesFile.exists()) {
     releasePropertiesFile.inputStream().use { releaseProperties.load(it) }
@@ -15,7 +18,7 @@ gradle.taskGraph.whenReady {
     }
 }
 
-android {
+extensions.configure<ApplicationExtension> {
     namespace = "com.communityconnect.community_connect"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
