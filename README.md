@@ -1,5 +1,9 @@
 # ChitChat
 
+**[Download the Android APK](https://github.com/mjrizzer/Chitchat-college-communitychat/releases/download/v1.0.0-preview/ChitChat-Android.apk)** · [Release notes and checksum](https://github.com/mjrizzer/Chitchat-college-communitychat/releases/tag/v1.0.0-preview)
+
+This ARM64 development preview supports the Galaxy S23. Open the downloaded APK to install it. No Supabase/Firebase API values, account sessions or server credentials are configured in this public download. It requires initial Supabase setup before chatting; push notifications still require Firebase configuration.
+
 An independent Flutter Android chat app: a shared **Community chat** and public **Spill the Chaya** groups that last one hour. Anonymous guests can chat immediately. The creator automatically enters their group.
 
 The final, simplified scope excludes college onboarding, feeds, events, media and role administration. Nothing is imported from Hostel Connect. The folder retains its original `community_connect` name; the app and Dart package are ChitChat.
