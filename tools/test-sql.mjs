@@ -14,6 +14,7 @@ try {
     create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema public,auth to anon,authenticated,service_role;
     grant execute on function auth.uid() to anon,authenticated,service_role;
+    insert into auth.users(id,aud,role,is_anonymous) values('90000000-0000-4000-8000-000000000009','authenticated','authenticated',true);
   `);
   for(const file of (await readdir(new URL('../supabase/migrations/',import.meta.url))).filter(f=>f.endsWith('.sql')).sort()){
   let migration = await readFile(new URL('../supabase/migrations/'+file, import.meta.url), 'utf8');
@@ -23,6 +24,8 @@ try {
   await db.exec(migration);
   }
   await db.exec(await readFile(new URL('../supabase/tests/security.sql', import.meta.url), 'utf8'));
+  const existing = await db.query("select id from public.profiles where id='90000000-0000-4000-8000-000000000009'");
+  if(existing.rows.length !== 1) throw new Error('Existing anonymous account was not backfilled.');
   console.log('PASS: PostgreSQL migration, RLS authorization, expiry, creator membership and deletion assertions.');
   console.log('NOT TESTED: hosted Supabase Auth, Cron scheduling, Realtime transport or Firebase delivery.');
 } catch (error) {
